@@ -8,7 +8,7 @@ class postmodel(models.Model):
     location     = models.CharField(max_length=255)
     photo        = models.ImageField(upload_to='user_uploads')
     likes        = models.PositiveIntegerField( default = 0)
-    uploaded_by  = models.ForeignKey(usermodel, on_delete=models.CASCADE)
+    uploaded_by  = models.ForeignKey(usermodel, on_delete=models.CASCADE, related_name='posts')
     liked_by     = models.ManyToManyField(usermodel, related_name='liked_photos',blank=True)
 
 
@@ -19,7 +19,7 @@ class commentsmodel(models.Model):
     commenttime   = models.DateTimeField(auto_now_add=True)
     commenttext   = models.TextField()
     commentedby   = models.ForeignKey(usermodel , on_delete=models.CASCADE)
-    commentpostby = models.ForeignKey(postmodel,  on_delete=models.CASCADE)
+    commentpostby = models.ForeignKey(postmodel,  on_delete=models.CASCADE , related_name='comments')
 
     def __str__(self):
         return str(self.commenttime)
