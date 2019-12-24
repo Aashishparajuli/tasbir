@@ -16,7 +16,7 @@
             <div class="profile__info">
                 <div class="profile__name">
                     <h1 class="profile__title">{{user.display_name}}</h1>
-                    <a href="edit-profile.html" class="profile__button u-fat-text">Edit profile</a>
+                    <a href="{% url 'edit-profile'%}" class="profile__button u-fat-text">Edit profile</a>
                     <i class="fa fa-cog fa-2x" id="cog"></i>
                 </div>
                 <ul class="profile__numbers">
@@ -38,8 +38,9 @@
             </div>
         </header>
         <div class="profile__pictures">
-            {%  for photo in user.posts.all %}
-            <a href="image-detail.html" class="profile-picture">
+            {%  for photo in post %}
+
+             <a href="image-detail.html" class="profile-picture">
                 <img
                     src="{{photo.photo.url}}"
                     class="profile-picture__picture"

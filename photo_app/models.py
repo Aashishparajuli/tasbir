@@ -7,7 +7,6 @@ class postmodel(models.Model):
     created      = models.DateTimeField(auto_now_add= True)
     location     = models.CharField(max_length=255)
     photo        = models.ImageField(upload_to='user_uploads')
-    likes        = models.PositiveIntegerField( default = 0)
     uploaded_by  = models.ForeignKey(usermodel, on_delete=models.CASCADE, related_name='posts')
     liked_by     = models.ManyToManyField(usermodel, related_name='liked_photos',blank=True)
 

@@ -15,6 +15,15 @@
                         <span class="photo__username">{{post.uploaded_by.username}}</span>
                         <span class="photo__location">{{post.location}}</span>
                     </div>
+                    <div class="photo__header-column">
+                        {%  if post.uploaded_by.id == request.session.user_id %}
+                        <form action ="{%   url 'deletephoto'%}"method="POST">
+                            {%csrf_token%}
+                            <input type="hidden" name="postid" value="{{post.id}}">
+                            <input type="submit" value="Delete" style="margin-left: 100px ">
+                        </form>   
+                        {%  endif %}
+                    </div>
                 </header>
                 <div class="photo__file-container">
                     <img
@@ -31,7 +40,9 @@
                             <i class="fa fa-comment-o fa-lg"></i>
                         </span>
                     </div>
+                    {% if post.liked_by.all|length%}
                     <span class="photo__likes">{{post.liked_by.all|length}} like {{post.liked_by.all|pluralize:"s"}}</span>
+                    {% endif %}
                     <ul class="photo__comments">
                         {%  for comment in post.comments.all %}
                         <li class="photo__comment">
